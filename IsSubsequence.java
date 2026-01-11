@@ -1,23 +1,28 @@
-import java.util.Collections;
-import java.util.HashMap;
+
 
 class Solution {
     public boolean isSubsequence(String s, String t) {
+        // use a string builder to remove the subsequence characters 
+        StringBuilder sub = new StringBuilder(s);
 
-        HashMap<Character,Integer> sub = new HashMap<>();
+        // if the subsequence is already empty then it must be a subsequence
+        if(sub.isEmpty()){
+            return true;
+        }
 
-        for(int i = 0; i < s.length() ; i++){
-            sub.put(s.charAt(i), i);
+        // use t length to check every character in the original string
+        for(int i = 0; i < t.length(); i++){
+            // error check to handle a empty subsequence if we've already found the subsequence
+            if(!sub.isEmpty()){
+                // if the character in order is at the first index of the subsequence then remove it to then keep the order
+                if(t.charAt(i) == sub.charAt(0)){
+                    sub.deleteCharAt(0);    
+                }
             }
+           
+        }
 
-           for(char c : t.toCharArray()) {
-            //??
-            if(sub.containsKey(c)){
-                sub.remove(c); 
-            }
-           }
-           // figure out HOW to index hashmaps then check if the number found is the lowest value in the hashmap
-           // then remove said vlaue until the hashmap is empty
+        // if the subsequence is empty at the end of the loop then we have correctly found it, if not then return false
            if(sub.isEmpty()){
             return true;
            }
