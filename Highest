@@ -1,0 +1,25 @@
+import java.util.ArrayList;
+
+class Solution {
+    public int largestAltitude(int[] gain) {
+        int n = gain.length + 1;
+
+        int highest = 0;
+
+        ArrayList<Integer> prefixSum = new ArrayList<>(); 
+
+        prefixSum.add(0);
+
+        for (int i = 1; i < n; i ++){
+            prefixSum.add(prefixSum.get(i-1) + gain[i-1]);
+        }
+
+           for ( int i : prefixSum){
+            if( i > highest){
+                highest = i;
+            }
+           }
+        
+        return highest;
+    }
+}
